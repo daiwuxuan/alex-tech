@@ -209,27 +209,6 @@ h2{margin:0;font:700 clamp(23px,3.7vw,33px)/1.2 var(--f-display);letter-spacing:
 .case-note{margin:0;font-size:13px;color:var(--dim);display:flex;align-items:center;gap:8px}
 .case-note::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--dim);flex:none}
 
-/* 案例二没有截图，用一张流程说明卡代替 —— 是示意图，不是伪造的界面 */
-.flow{display:flex;flex-direction:column;gap:9px}
-.flow-row{
-  display:flex;align-items:center;gap:13px;
-  padding:13px 15px;border-radius:12px;
-  background:rgba(255,255,255,.035);border:1px solid var(--line);
-}
-.flow-n{
-  font:700 12px/1 var(--f-mono);color:var(--accent-2);
-  width:22px;flex:none;letter-spacing:.06em;font-variant-numeric:tabular-nums;
-}
-.flow-ico{
-  width:34px;height:34px;border-radius:9px;display:grid;place-items:center;flex:none;
-  background:linear-gradient(135deg,rgba(91,140,255,.20),rgba(34,211,197,.12));
-  border:1px solid rgba(91,140,255,.24);color:#A6C4FF;
-}
-.flow-ico svg{width:18px;height:18px}
-.flow-txt{min-width:0}
-.flow-t{display:block;font:600 14.5px/1.35 var(--f-body)}
-.flow-d{display:block;font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.5}
-
 /* --- 流程 -------------------------------------------------------------- */
 .steps{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
 .step{
@@ -472,29 +451,12 @@ footer{position:relative;z-index:1;border-top:1px solid var(--line);margin-top:c
       </article>
 
       <article class="case">
-        <div class="case-media" style="padding:clamp(14px,2vw,20px);background:var(--ground-2)">
-          <div class="flow">
-            <div class="flow-row">
-              <span class="flow-n">01</span>
-              <span class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6.5" width="19" height="14" rx="3"/><circle cx="12" cy="13.5" r="3.6"/><path d="M8.5 6.5 10 3.5h4l1.5 3"/></svg></span>
-              <span class="flow-txt"><span class="flow-t" data-i18n="f1.t">客户发来小票照片</span><span class="flow-d" data-i18n="f1.d">西班牙语的手写小票，直接拍照发过来</span></span>
-            </div>
-            <div class="flow-row">
-              <span class="flow-n">02</span>
-              <span class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2.5"/><path d="M10 2.5v3M14 2.5v3M10 18.5v3M14 18.5v3M2.5 10h3M2.5 14h3M18.5 10h3M18.5 14h3"/></svg></span>
-              <span class="flow-txt"><span class="flow-t" data-i18n="f2.t">AI 读出产品编号和数量</span><span class="flow-d" data-i18n="f2.d">认不准的地方单独列成清单，交给人工看</span></span>
-            </div>
-            <div class="flow-row">
-              <span class="flow-n">03</span>
-              <span class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2.5H7a2.5 2.5 0 0 0-2.5 2.5v14A2.5 2.5 0 0 0 7 21.5h10a2.5 2.5 0 0 0 2.5-2.5V8l-5.5-5.5Z"/><path d="M14 2.5V8h5.5M8.5 13h7M8.5 17h4.5"/></svg></span>
-              <span class="flow-txt"><span class="flow-t" data-i18n="f3.t">生成订单草稿</span><span class="flow-d" data-i18n="f3.d">AI 不会自动确认，等你核对</span></span>
-            </div>
-            <div class="flow-row">
-              <span class="flow-n">04</span>
-              <span class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="m8 12.3 2.7 2.7L16 9.8"/></svg></span>
-              <span class="flow-txt"><span class="flow-t" data-i18n="f4.t">你确认，自动扣库存、记欠款</span><span class="flow-d" data-i18n="f4.d">库存不够直接拦下，不会扣一半</span></span>
-            </div>
-          </div>
+        <div class="case-media">
+          <button type="button" class="case-shot" data-zoom="images/cases/backoffice/backoffice-dashboard.png">
+            <img src="images/cases/backoffice/backoffice-dashboard.png" width="1920" height="1080" loading="lazy" decoding="async"
+                 alt="业务后台总览：待核对草稿、待发货订单、订单未收、客户欠款、订单累计金额五个指标，下面是今日待办和最近订单">
+            <span class="case-zoomhint" data-i18n="zoom.hint">点击放大</span>
+          </button>
         </div>
         <div class="case-body">
           <div class="case-tags">
@@ -664,10 +626,6 @@ var I18N = {
     "c2.b4":"每个客户欠多少、账期多久，一页看清，可打印对账单。",
     "c2.hl":"「AI 只提速，不拍板」—— 导入表格时 AI 只判断「哪一列是什么」，每一个数字仍由程序逐行精确读取，几千行不限、价格一分不差。今日简报的五个数字由数据库算好，只让 AI 组织语言，不让它做算术。",
     "c2.note":"真实业务在用 · 数据全部留在本机，断网也能开单",
-    "f1.t":"客户发来小票照片","f1.d":"西班牙语的手写小票，拍照发过来就行",
-    "f2.t":"AI 读出产品编号和数量","f2.d":"认不准的地方单独列成清单，交给人工看",
-    "f3.t":"生成订单草稿","f3.d":"AI 不会自动确认，等你核对",
-    "f4.t":"你确认，自动扣库存、记欠款","f4.d":"库存不够直接拦下，不会扣一半",
     "zoom.hint":"点击放大",
     "pr.k":"合作流程","pr.t":"六步交付，钱货两清","pr.d":"先看效果再付尾款，不满意可以调整。",
     "p1.t":"沟通需求","p1.d":"你说需求，我出方案和报价。",
@@ -715,10 +673,6 @@ var I18N = {
     "c2.b4":"Every customer's balance and aging on one screen, printable as a statement.",
     "c2.hl":"\"The AI speeds things up. It never signs off.\" When importing a spreadsheet the AI only decides which column is which; every number is still read cell by cell by ordinary code, so thousands of rows import at the exact right price. The daily briefing's five figures are computed in SQL; the AI only phrases them.",
     "c2.note":"Running a real business today · all data stays on your machine, works offline",
-    "f1.t":"A customer sends a receipt photo","f1.d":"Handwritten, in Spanish — just take a picture",
-    "f2.t":"The AI reads part numbers and quantities","f2.d":"Anything unclear is listed separately for a human to check",
-    "f3.t":"A draft order is created","f3.d":"Nothing is confirmed automatically — it waits for you",
-    "f4.t":"You confirm — stock and debt update","f4.d":"Insufficient stock is refused, not half-applied",
     "zoom.hint":"Click to enlarge",
     "pr.k":"How it works","pr.t":"Six steps, start to finish","pr.d":"You see it working before you pay the balance.",
     "p1.t":"Brief me","p1.d":"You describe it, I quote and propose.",
@@ -766,10 +720,6 @@ var I18N = {
     "c2.b4":"El saldo y la antigüedad de cada cliente en una pantalla, imprimible como estado de cuenta.",
     "c2.hl":"«La IA acelera. Nunca autoriza.» Al importar una hoja de cálculo la IA solo decide qué columna es cuál; cada número lo lee el programa celda por celda, así que miles de filas entran con el precio exacto. Las cinco cifras del resumen diario las calcula SQL; la IA solo las redacta.",
     "c2.note":"Operando un negocio real hoy · todos los datos se quedan en tu computadora, funciona sin internet",
-    "f1.t":"El cliente manda la foto del ticket","f1.d":"Escrito a mano, en español: basta con fotografiarlo",
-    "f2.t":"La IA lee claves y cantidades","f2.d":"Lo que no queda claro se lista aparte para que lo revise una persona",
-    "f3.t":"Se crea un pedido en borrador","f3.d":"Nada se confirma solo: espera tu revisión",
-    "f4.t":"Confirmas: stock y deuda se actualizan","f4.d":"Si el stock no alcanza se rechaza, no se aplica a medias",
     "zoom.hint":"Clic para ampliar",
     "pr.k":"Cómo trabajamos","pr.t":"Seis pasos de principio a fin","pr.d":"Ves el resultado funcionando antes de pagar el saldo.",
     "p1.t":"Cuéntame","p1.d":"Me describes el proyecto y te doy propuesta y precio.",

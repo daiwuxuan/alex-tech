@@ -153,6 +153,83 @@ h2{margin:0;font:700 clamp(23px,3.7vw,33px)/1.2 var(--f-display);letter-spacing:
 .card h3{margin:0;font:600 17px/1.35 var(--f-display);letter-spacing:-.01em}
 .card p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.68}
 
+/* --- 案例 -------------------------------------------------------------- */
+.cases{display:flex;flex-direction:column;gap:clamp(20px,3vw,30px)}
+.case{
+  display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);
+  gap:clamp(20px,3vw,32px);align-items:center;
+  border:1px solid var(--line);border-radius:22px;background:var(--card);
+  padding:clamp(16px,2.2vw,24px);
+  transition:border-color .25s,background .25s;
+}
+.case:hover{border-color:var(--line-2);background:var(--surface-2)}
+.case-media{
+  border-radius:14px;overflow:hidden;border:1px solid var(--line-2);
+  background:#0A0E18;min-width:0;
+}
+.case-media img{width:100%;height:auto;display:block}
+.case-shot{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;position:relative}
+.case-zoomhint{
+  position:absolute;right:10px;bottom:10px;
+  font:500 12px/1 var(--f-body);padding:6px 11px;border-radius:999px;
+  background:rgba(7,10,17,.82);border:1px solid var(--line-2);color:var(--fg);
+  opacity:0;transition:opacity .2s;pointer-events:none;
+}
+.case-shot:hover .case-zoomhint,.case-shot:focus-visible .case-zoomhint{opacity:1}
+/* 放大弹窗要盖掉 .sheet 自己的 400px 宽度限制，所以用两个类选择器 */
+.zoom .sheet-wrap{max-width:min(1400px,96vw)}
+.zoom .sheet{max-width:min(1400px,96vw);padding:14px;gap:0}
+.zoom .sheet img{
+  width:auto;height:auto;max-width:100%;max-height:calc(100dvh - 96px);
+  margin-inline:auto;border-radius:10px;display:block;
+}
+.case-body{display:flex;flex-direction:column;gap:14px;min-width:0}
+.case-tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{
+  font:600 12px/1 var(--f-body);padding:6px 11px;border-radius:999px;
+  border:1px solid var(--line-2);color:var(--muted);background:rgba(255,255,255,.04);
+}
+.tag-live{color:#79E0A6;border-color:rgba(37,211,102,.38);background:rgba(37,211,102,.10)}
+.tag-ai{color:#A6C4FF;border-color:rgba(91,140,255,.38);background:rgba(91,140,255,.12)}
+.case h3{margin:0;font:700 clamp(19px,2.4vw,23px)/1.3 var(--f-display);letter-spacing:-.015em}
+.case-pitch{margin:0;font-size:15.5px;line-height:1.65;color:var(--fg)}
+.case-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px}
+.case-list li{display:flex;gap:10px;color:var(--muted);font-size:14.5px;line-height:1.62}
+.case-list li::before{
+  content:"";width:5px;height:5px;border-radius:50%;background:var(--accent-2);
+  flex:none;margin-top:9px;
+}
+.case-hl{
+  margin:0;padding:14px 16px;border-radius:12px;
+  font-size:14.5px;line-height:1.68;color:var(--fg);
+  background:linear-gradient(135deg,rgba(91,140,255,.13),rgba(34,211,197,.07));
+  border:1px solid rgba(91,140,255,.24);
+}
+.case-hl b{color:var(--accent-2);font-weight:600}
+.case-note{margin:0;font-size:13px;color:var(--dim);display:flex;align-items:center;gap:8px}
+.case-note::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--dim);flex:none}
+
+/* 案例二没有截图，用一张流程说明卡代替 —— 是示意图，不是伪造的界面 */
+.flow{display:flex;flex-direction:column;gap:9px}
+.flow-row{
+  display:flex;align-items:center;gap:13px;
+  padding:13px 15px;border-radius:12px;
+  background:rgba(255,255,255,.035);border:1px solid var(--line);
+}
+.flow-n{
+  font:700 12px/1 var(--f-mono);color:var(--accent-2);
+  width:22px;flex:none;letter-spacing:.06em;font-variant-numeric:tabular-nums;
+}
+.flow-ico{
+  width:34px;height:34px;border-radius:9px;display:grid;place-items:center;flex:none;
+  background:linear-gradient(135deg,rgba(91,140,255,.20),rgba(34,211,197,.12));
+  border:1px solid rgba(91,140,255,.24);color:#A6C4FF;
+}
+.flow-ico svg{width:18px;height:18px}
+.flow-txt{min-width:0}
+.flow-t{display:block;font:600 14.5px/1.35 var(--f-body)}
+.flow-d{display:block;font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.5}
+
 /* --- 流程 -------------------------------------------------------------- */
 .steps{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
 .step{
@@ -243,6 +320,11 @@ footer{position:relative;z-index:1;border-top:1px solid var(--line);margin-top:c
 .close:hover{background:var(--card-2);color:var(--fg)}
 .close svg{width:16px;height:16px}
 .sheet-wrap{position:relative;width:100%;max-width:400px}
+
+/* --- 案例在窄屏改成上下堆叠 -------------------------------------------- */
+@media (max-width:900px){
+  .case{grid-template-columns:1fr;gap:20px}
+}
 
 /* --- 手机端：底部固定双按钮条 ------------------------------------------ */
 @media (max-width:640px){
@@ -354,6 +436,87 @@ footer{position:relative;z-index:1;border-top:1px solid var(--line);margin-top:c
     </div>
   </section>
 
+  <!-- 案例 -->
+  <section class="sec wrap">
+    <div class="sec-head">
+      <span class="kicker" data-i18n="cs.k">案例</span>
+      <h2 data-i18n="cs.t">我做过什么</h2>
+      <p data-i18n="cs.d">两个真实项目：一个每天在批发店里跑，一个能让 WhatsApp 变成 24 小时销售员。</p>
+    </div>
+    <div class="cases">
+
+      <article class="case">
+        <div class="case-media">
+          <button type="button" class="case-shot" data-zoom="images/cases/playground.png">
+            <img src="images/cases/playground.png" width="1440" height="1000" loading="lazy" decoding="async"
+                 alt="AI 销售机器人对话演示：顾客问「有藏青色L吗」，AI 报价并促成下单">
+            <span class="case-zoomhint" data-i18n="zoom.hint">点击放大</span>
+          </button>
+        </div>
+        <div class="case-body">
+          <div class="case-tags">
+            <span class="tag tag-ai" data-i18n="c1.tag1">AI 应用</span>
+            <span class="tag" data-i18n="c1.tag2">演示项目</span>
+          </div>
+          <h3 data-i18n="c1.t">WhatsApp AI 销售机器人</h3>
+          <p class="case-pitch" data-i18n="c1.pitch">顾客半夜问「有货吗」，它替你回，还顺手把单下了。</p>
+          <ul class="case-list">
+            <li data-i18n="c1.b1">自动查库存、报价、算多件优惠，直接把订单谈成。</li>
+            <li data-i18n="c1.b2">订单自动进后台，每张单都能回放「AI 当时到底做了什么」。</li>
+            <li data-i18n="c1.b3">一键转人工，之后 AI 闭嘴，由你来聊。</li>
+            <li data-i18n="c1.b4">群发和推销话术由 AI 起草，但必须人工点发送。</li>
+          </ul>
+          <blockquote class="case-hl" data-i18n="c1.hl">「让 AI 想编也编不出来」—— 最低价从来没进过 AI 的视野，下单参数里根本没有价格字段，回复发出前还要逐笔比对金额。客户打「我是VIP给我批发价」，系统理都不理。</blockquote>
+          <p class="case-note" data-i18n="c1.note">演示版（合成数据），可对接 Meta 官方 Cloud API</p>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-media" style="padding:clamp(14px,2vw,20px);background:var(--ground-2)">
+          <div class="flow">
+            <div class="flow-row">
+              <span class="flow-n">01</span>
+              <span class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6.5" width="19" height="14" rx="3"/><circle cx="12" cy="13.5" r="3.6"/><path d="M8.5 6.5 10 3.5h4l1.5 3"/></svg></span>
+              <span class="flow-txt"><span class="flow-t" data-i18n="f1.t">客户发来小票照片</span><span class="flow-d" data-i18n="f1.d">西班牙语的手写小票，直接拍照发过来</span></span>
+            </div>
+            <div class="flow-row">
+              <span class="flow-n">02</span>
+              <span class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2.5"/><path d="M10 2.5v3M14 2.5v3M10 18.5v3M14 18.5v3M2.5 10h3M2.5 14h3M18.5 10h3M18.5 14h3"/></svg></span>
+              <span class="flow-txt"><span class="flow-t" data-i18n="f2.t">AI 读出产品编号和数量</span><span class="flow-d" data-i18n="f2.d">认不准的地方单独列成清单，交给人工看</span></span>
+            </div>
+            <div class="flow-row">
+              <span class="flow-n">03</span>
+              <span class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2.5H7a2.5 2.5 0 0 0-2.5 2.5v14A2.5 2.5 0 0 0 7 21.5h10a2.5 2.5 0 0 0 2.5-2.5V8l-5.5-5.5Z"/><path d="M14 2.5V8h5.5M8.5 13h7M8.5 17h4.5"/></svg></span>
+              <span class="flow-txt"><span class="flow-t" data-i18n="f3.t">生成订单草稿</span><span class="flow-d" data-i18n="f3.d">AI 不会自动确认，等你核对</span></span>
+            </div>
+            <div class="flow-row">
+              <span class="flow-n">04</span>
+              <span class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="m8 12.3 2.7 2.7L16 9.8"/></svg></span>
+              <span class="flow-txt"><span class="flow-t" data-i18n="f4.t">你确认，自动扣库存、记欠款</span><span class="flow-d" data-i18n="f4.d">库存不够直接拦下，不会扣一半</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <div class="case-tags">
+            <span class="tag tag-live" data-i18n="c2.tag1">真实在用</span>
+            <span class="tag" data-i18n="c2.tag2">进销存系统</span>
+          </div>
+          <h3 data-i18n="c2.t">批发店进销存与欠款管理</h3>
+          <p class="case-pitch" data-i18n="c2.pitch">客户发来一张西班牙语小票照片，系统自动变成中文订单，还顺手扣了库存、记了欠款。</p>
+          <ul class="case-list">
+            <li data-i18n="c2.b1">发货自动扣库存，库存不够直接拦下，不会扣一半。</li>
+            <li data-i18n="c2.b2">收款传转账截图，AI 核对金额；超出应收金额，服务器直接拒绝。</li>
+            <li data-i18n="c2.b3">同一张凭证重复提交会被拦，防止重复入账。</li>
+            <li data-i18n="c2.b4">每个客户欠多少、账期多久，一页看清，可打印对账单。</li>
+          </ul>
+          <blockquote class="case-hl" data-i18n="c2.hl">「AI 只提速，不拍板」—— 导入表格时 AI 只判断「哪一列是什么」，每一个数字仍由程序逐行精确读取，几千行不限、价格一分不差。今日简报的五个数字由数据库算好，只让 AI 组织语言，不让它做算术。</blockquote>
+          <p class="case-note" data-i18n="c2.note">真实业务在用 · 数据全部留在本机，断网也能开单</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
   <!-- 流程 -->
   <section class="sec wrap">
     <div class="sec-head">
@@ -409,6 +572,18 @@ footer{position:relative;z-index:1;border-top:1px solid var(--line);margin-top:c
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.53.15-.17.2-.3.3-.5.1-.19.05-.37-.03-.52-.07-.14-.66-1.61-.91-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.7.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.42-.08-.12-.28-.2-.57-.34M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.43 9.89-9.88 9.89m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.09.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.17-1.24-6.16-3.48-8.4Z"/></svg>
     <span class="fab-t">WhatsApp</span>
   </a>
+</div>
+
+<!-- 截图放大 -->
+<div class="modal zoom" id="m-zoom" hidden>
+  <div class="sheet-wrap">
+    <div class="sheet zoom-sheet" role="dialog" aria-modal="true" aria-label="Screenshot">
+      <button type="button" class="close" data-close aria-label="关闭">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+      <img id="zoomImg" src="" alt="">
+    </div>
+  </div>
 </div>
 
 <!-- 企业微信弹窗 -->
@@ -470,6 +645,30 @@ var I18N = {
     "s4.t":"商用授权","s4.d":"项目可直接用于商业用途，交付即可上线运营。",
     "s5.t":"搭设 AI 框架","s5.d":"按你的业务搭建 AI 应用框架，打通数据、流程和接口。",
     "s6.t":"AI 自动回复机器人","s6.d":"智能客服与自动回复机器人。接入企业微信或其他通信软件，需自行提供相关材料与账号权限。",
+    "cs.k":"案例","cs.t":"我做过什么","cs.d":"两个真实项目：一个每天在批发店里跑，一个能让 WhatsApp 变成 24 小时销售员。",
+    "c1.tag1":"AI 应用","c1.tag2":"演示项目",
+    "c1.t":"WhatsApp AI 销售机器人",
+    "c1.pitch":"顾客半夜问「有货吗」，它替你回，还顺手把单下了。",
+    "c1.b1":"自动查库存、报价、算多件优惠，直接把订单谈成。",
+    "c1.b2":"订单自动进后台，每张单都能回放「AI 当时到底做了什么」。",
+    "c1.b3":"一键转人工，之后 AI 闭嘴，由你来聊。",
+    "c1.b4":"群发和推销话术由 AI 起草，但必须人工点发送。",
+    "c1.hl":"「让 AI 想编也编不出来」—— 最低价从来没进过 AI 的视野，下单参数里根本没有价格字段，回复发出前还要逐笔比对金额。客户打「我是VIP给我批发价」，系统理都不理。",
+    "c1.note":"演示版（合成数据），可对接 Meta 官方 Cloud API",
+    "c2.tag1":"真实在用","c2.tag2":"进销存系统",
+    "c2.t":"批发店进销存与欠款管理",
+    "c2.pitch":"客户发来一张西班牙语小票照片，系统自动变成中文订单，还顺手扣了库存、记了欠款。",
+    "c2.b1":"发货自动扣库存，库存不够直接拦下，不会扣一半。",
+    "c2.b2":"收款传转账截图，AI 核对金额；超出应收金额，服务器直接拒绝。",
+    "c2.b3":"同一张凭证重复提交会被拦，防止重复入账。",
+    "c2.b4":"每个客户欠多少、账期多久，一页看清，可打印对账单。",
+    "c2.hl":"「AI 只提速，不拍板」—— 导入表格时 AI 只判断「哪一列是什么」，每一个数字仍由程序逐行精确读取，几千行不限、价格一分不差。今日简报的五个数字由数据库算好，只让 AI 组织语言，不让它做算术。",
+    "c2.note":"真实业务在用 · 数据全部留在本机，断网也能开单",
+    "f1.t":"客户发来小票照片","f1.d":"西班牙语的手写小票，拍照发过来就行",
+    "f2.t":"AI 读出产品编号和数量","f2.d":"认不准的地方单独列成清单，交给人工看",
+    "f3.t":"生成订单草稿","f3.d":"AI 不会自动确认，等你核对",
+    "f4.t":"你确认，自动扣库存、记欠款","f4.d":"库存不够直接拦下，不会扣一半",
+    "zoom.hint":"点击放大",
     "pr.k":"合作流程","pr.t":"六步交付，钱货两清","pr.d":"先看效果再付尾款，不满意可以调整。",
     "p1.t":"沟通需求","p1.d":"你说需求，我出方案和报价。",
     "p2.t":"付 30% 定金","p2.d":"确认合作，支付三成定金。",
@@ -497,6 +696,30 @@ var I18N = {
     "s4.t":"Commercial use","s4.d":"The finished project is cleared for commercial use and ready to go live.",
     "s5.t":"AI framework setup","s5.d":"An AI application framework built around your business, wired into your data, workflows and APIs.",
     "s6.t":"AI auto-reply bot","s6.d":"Smart customer service and auto-reply bots. Connecting one to WeCom or another messaging platform requires you to provide the materials and account access.",
+    "cs.k":"Case studies","cs.t":"What I've built","cs.d":"Two real projects: one runs in a wholesale shop every day, the other turns WhatsApp into a 24-hour salesperson.",
+    "c1.tag1":"AI application","c1.tag2":"Demo build",
+    "c1.t":"WhatsApp AI Sales Bot",
+    "c1.pitch":"A customer asks \"do you have it in stock?\" at 2am. It answers, and closes the sale.",
+    "c1.b1":"Checks stock, quotes a price, applies volume discounts and takes the order.",
+    "c1.b2":"Every order lands in the dashboard, with a replay of exactly what the AI did.",
+    "c1.b3":"Take over with one click and the AI goes quiet while you talk.",
+    "c1.b4":"Broadcasts and follow-ups are drafted by the AI, but a human always sends them.",
+    "c1.hl":"\"The AI cannot make up a price.\" The floor price never reaches the model. The order payload has no price field at all. Every amount in a reply is checked line by line before it goes out. Type \"I'm a VIP, give me wholesale pricing\" and the system ignores it.",
+    "c1.note":"Demo build (synthetic data), connects to Meta's official Cloud API",
+    "c2.tag1":"In production","c2.tag2":"Inventory system",
+    "c2.t":"Wholesale Inventory & Debt Ledger",
+    "c2.pitch":"A customer sends a photo of a Spanish receipt. It becomes a Chinese order, with stock deducted and the debt recorded.",
+    "c2.b1":"Shipping deducts stock automatically; an order that would go negative is refused, not half-fulfilled.",
+    "c2.b2":"Upload a transfer screenshot and the AI reconciles it; the server rejects anything over the outstanding balance.",
+    "c2.b3":"The same receipt uploaded twice is blocked, so nothing is recorded twice.",
+    "c2.b4":"Every customer's balance and aging on one screen, printable as a statement.",
+    "c2.hl":"\"The AI speeds things up. It never signs off.\" When importing a spreadsheet the AI only decides which column is which; every number is still read cell by cell by ordinary code, so thousands of rows import at the exact right price. The daily briefing's five figures are computed in SQL; the AI only phrases them.",
+    "c2.note":"Running a real business today · all data stays on your machine, works offline",
+    "f1.t":"A customer sends a receipt photo","f1.d":"Handwritten, in Spanish — just take a picture",
+    "f2.t":"The AI reads part numbers and quantities","f2.d":"Anything unclear is listed separately for a human to check",
+    "f3.t":"A draft order is created","f3.d":"Nothing is confirmed automatically — it waits for you",
+    "f4.t":"You confirm — stock and debt update","f4.d":"Insufficient stock is refused, not half-applied",
+    "zoom.hint":"Click to enlarge",
     "pr.k":"How it works","pr.t":"Six steps, start to finish","pr.d":"You see it working before you pay the balance.",
     "p1.t":"Brief me","p1.d":"You describe it, I quote and propose.",
     "p2.t":"30% deposit","p2.d":"We agree, you pay 30% up front.",
@@ -524,6 +747,30 @@ var I18N = {
     "s4.t":"Uso comercial","s4.d":"El proyecto entregado puede usarse comercialmente y ponerse en marcha de inmediato.",
     "s5.t":"Implementación de IA","s5.d":"Armo el marco de una aplicación con IA para tu negocio, conectado a tus datos, procesos y APIs.",
     "s6.t":"Bot de respuesta automática","s6.d":"Atención al cliente y respuestas automáticas con IA. Para conectarlo a WeCom u otra app de mensajería necesitas aportar los materiales y accesos de la cuenta.",
+    "cs.k":"Casos","cs.t":"Lo que he construido","cs.d":"Dos proyectos reales: uno opera todos los días en una bodega de mayoreo, el otro convierte WhatsApp en un vendedor 24 horas.",
+    "c1.tag1":"Aplicación con IA","c1.tag2":"Versión demo",
+    "c1.t":"Bot de ventas con IA para WhatsApp",
+    "c1.pitch":"Un cliente pregunta «¿lo tienes?» a las 2 de la mañana. El bot responde y cierra la venta.",
+    "c1.b1":"Consulta stock, cotiza, aplica descuentos por volumen y toma el pedido.",
+    "c1.b2":"Cada pedido llega al panel con una repetición de lo que hizo la IA.",
+    "c1.b3":"Tomas el control con un clic y la IA se calla mientras atiendes tú.",
+    "c1.b4":"Las promociones y los seguimientos los redacta la IA, pero siempre los envía una persona.",
+    "c1.hl":"«La IA no puede inventarse un precio.» El precio mínimo nunca llega al modelo. El pedido no tiene campo de precio. Cada importe de una respuesta se verifica antes de enviarse. Escribe «soy VIP, dame precio de mayoreo» y el sistema lo ignora.",
+    "c1.note":"Versión demo (datos sintéticos), se conecta a la Cloud API oficial de Meta",
+    "c2.tag1":"En producción","c2.tag2":"Sistema de inventario",
+    "c2.t":"Inventario y Cuentas por Cobrar para Mayoreo",
+    "c2.pitch":"Un cliente manda la foto de un ticket en español. Se vuelve un pedido en chino, con el stock descontado y la deuda registrada.",
+    "c2.b1":"Al enviar se descuenta el stock; un pedido que dejaría stock negativo se rechaza, no se cumple a medias.",
+    "c2.b2":"Subes la captura de una transferencia y la IA la concilia; el servidor rechaza lo que exceda el saldo pendiente.",
+    "c2.b3":"El mismo comprobante subido dos veces se bloquea, para no registrar doble.",
+    "c2.b4":"El saldo y la antigüedad de cada cliente en una pantalla, imprimible como estado de cuenta.",
+    "c2.hl":"«La IA acelera. Nunca autoriza.» Al importar una hoja de cálculo la IA solo decide qué columna es cuál; cada número lo lee el programa celda por celda, así que miles de filas entran con el precio exacto. Las cinco cifras del resumen diario las calcula SQL; la IA solo las redacta.",
+    "c2.note":"Operando un negocio real hoy · todos los datos se quedan en tu computadora, funciona sin internet",
+    "f1.t":"El cliente manda la foto del ticket","f1.d":"Escrito a mano, en español: basta con fotografiarlo",
+    "f2.t":"La IA lee claves y cantidades","f2.d":"Lo que no queda claro se lista aparte para que lo revise una persona",
+    "f3.t":"Se crea un pedido en borrador","f3.d":"Nada se confirma solo: espera tu revisión",
+    "f4.t":"Confirmas: stock y deuda se actualizan","f4.d":"Si el stock no alcanza se rechaza, no se aplica a medias",
+    "zoom.hint":"Clic para ampliar",
     "pr.k":"Cómo trabajamos","pr.t":"Seis pasos de principio a fin","pr.d":"Ves el resultado funcionando antes de pagar el saldo.",
     "p1.t":"Cuéntame","p1.d":"Me describes el proyecto y te doy propuesta y precio.",
     "p2.t":"30% de anticipo","p2.d":"Acordamos y pagas el 30% por adelantado.",
@@ -611,6 +858,14 @@ function closeModal(){
    启动
    ========================================================================== */
 document.addEventListener("click", function(e){
+  var zoom = e.target.closest("[data-zoom]");
+  if (zoom){
+    e.preventDefault();
+    var zi = $("#zoomImg");
+    if (zi) zi.src = zoom.getAttribute("data-zoom");
+    openModal("m-zoom");
+    return;
+  }
   var opener = e.target.closest("[data-open]");
   if (opener){
     var which = opener.getAttribute("data-open");

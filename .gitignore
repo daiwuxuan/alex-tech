@@ -1,0 +1,7 @@
+# 二维码原图：网站只用到 images/ 里裁切好的成品图
+WhatsApp Image *.jpeg
+
+# 本地打包/临时文件
+*.zip
+_*.html
+_*.png
